@@ -1,0 +1,26 @@
+[global_config]
+  dbus = True
+  focus = click
+  window_state = maximise
+  borderless = True
+  disable_real_transparency = False
+  suppress_multiple_term_dialog = True
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.78
+    background_type = transparent
+    font = Terminus 18
+    icon_bell = False
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False

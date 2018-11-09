@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TEMP=$(sensors | grep -oP 'Package.*?\+\K[0-9.]+')
+COLOR='\x06\uF2C9'
+
+if [[ "$TEMP" -gt 85 ]]; then
+  COLOR='\x04\uF2C8'
+elif [[ "$TEMP" -gt 70 ]]; then
+  COLOR='\x03\uF2C7'
+fi
+
+echo -e $COLOR $TEMP°C'\x01'

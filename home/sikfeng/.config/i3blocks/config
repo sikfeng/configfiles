@@ -1,0 +1,95 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+# i3blocks config file
+
+# Global properties
+command=~/.config/i3blocks/i3scripts/$BLOCK_NAME
+align=center
+separator=false
+separator_block_width=20
+markup=pango
+
+# CPU usage
+[cpu_usage]
+interval=2
+#color=#8CE000
+#border=#8CE000
+separator=true
+
+# Temperature
+[temperature]
+interval=2
+#color=#4ec2f7
+#border=#4ec2f7
+separator=true
+
+# Battery
+[battery]
+#command=acpi
+interval=5
+#color=#8CE000
+#border=#8CE000
+separator=true
+
+# Volume
+[volume]
+interval=1
+signal=10
+#color=#FF8C00
+#border=#FF8C00
+separator=true
+
+# Brightness
+[brightness]
+interval=1
+signal=10
+separator=true
+
+# Wifi
+[wifi]
+command=printf "\\uf1eb " && ~/.config/i3blocks/i3scripts/wifi
+instance=wls1
+#color=#4ec2f7
+#border=#4ec2f7
+interval=5
+separator=true
+
+# Time
+[time]
+command=printf "\\uf017 " && date '+%I:%M' 
+interval=5
+#color=#8CE000
+#border=#8CE000
+separator=true
+
+# Date
+[date]
+command=printf "\\uf073 " && date '+%A %e '
+interval=60
+#color=#f92672
+#border=#f92672
+separator=true

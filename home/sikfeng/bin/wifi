@@ -1,0 +1,11 @@
+#!/bin/bash
+
+INTERFACE="${BLOCK_INSTANCE:-wlp3s0}"
+SSID_NAME=$(iwgetid -r)
+#QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+if [[ "${SSID_NAME}" != "" ]]; then
+    echo -e '\x05\uF1EB '${SSID_NAME}'\x01'
+else
+    echo -e '\x06\uF1EB Not Connected\x01'
+fi

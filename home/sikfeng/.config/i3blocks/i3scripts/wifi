@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+INTERFACE="${BLOCK_INSTANCE:-wlp3s0}"
+SSID_NAME=$(iwgetid -r)
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+if [[ "${SSID_NAME}" != "" ]]; then
+    echo "${SSID_NAME}"
+    echo "${SSID_NAME}"
+    echo "#8ec000"
+    #echo "${SSID_NAME} $QUALITY%"
+else
+    echo "Not Connected"
+    echo "Not Connected"
+    echo "#4ec2f7"
+fi
+
+# color
+#if [[ $QUALITY -ge 60 ]]; then
+#    echo "#4ec2f7"
+#elif [[ $QUALITY -lt 60 ]]; then
+#    echo "#8CE000"
+#elif [[ $QUALITY -lt 40 ]]; then
+#    echo "#fd971f"
+#elif [[ $QUALITY -lt 20 ]]; then
+#    echo "#f92672"
+#fi
+
+case $BLOCK_BUTTON in 
+  1) networkmanager_dmenu;;
+esac

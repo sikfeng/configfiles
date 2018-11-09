@@ -1,0 +1,24 @@
+#!/bin/bash
+BATTRY=$(cat /sys/class/power_supply/BAT0/capacity)
+
+
+if [[ "$BATTRY" != "" ]]; then
+  echo $(acpi -b | awk '{ split($5,a,":"); print $3, $4, "["a[1]":"a[2]"]" }' | tr -d ',')
+  echo $(acpi -b | awk '{ split($5,a,":"); print $3, $4, "["a[1]":"a[2]"]" }' | tr -d ',')
+  if [[ "BATTRY" -gt 20 ]]; then
+    echo "#8ce000"
+  else
+		echo "#ff0000"
+	fi
+else
+	echo "No Battery"
+  echo "No Battery"
+  echo "#cccccc"
+fi
+
+# color
+#if [[ $BATTRY -ge 25 ]]; then
+#	printf "#8CE000"
+#elif [[ $BATTRY -lt 25 ]]; then
+#	printf "#FF0000"
+#fi

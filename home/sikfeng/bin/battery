@@ -1,0 +1,14 @@
+#!/bin/bash
+
+BATTRY=$(cat /sys/class/power_supply/BAT0/capacity)
+COLOR='\x05'
+#STATUS=$(acpi | grep Charging))
+
+#if [[ "$STATUS" ]]; then
+if [[ "$BATTRY" -lt 20 ]]; then
+  COLOR='\x04'
+fi
+#fi
+
+DISP=$(acpi | awk '{ split($5,a,":"); print $3, $4, "["a[1]":"a[2]"]" }' | tr -d ',')
+echo -e $COLOR$DISP'\x01'
