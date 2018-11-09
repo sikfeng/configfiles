@@ -1,0 +1,3 @@
+[submodule "home/sikfeng/suckless-configs"]
+	path = home/sikfeng/suckless-configs
+	url = https://github.com/sikfeng/suckless-configs
