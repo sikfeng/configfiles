@@ -2,7 +2,7 @@
 
 COLOR='\x05'
 ICON='\uf1e6 \uf240'
-BATTERY=$(acpi | awk {'print $4'} | tr -d ',')
+BATTERY=$(acpi | awk {'print $4'} | tr -d ',' | tr -d '%')
 STATUS=$(acpi | awk {'print $3'} | tr -d ',')
 TIME=$(acpi | awk {'print $5'})
 DISPTIME=$(acpi | awk {'split($5,a,":"); print a[1]"h "a[2]"m"'})
@@ -15,16 +15,16 @@ elif [[ "$BATTERY" -lt 50 ]]; then
 elif [[ "$BATTERY" -lt 75 ]]; then
   ICON='\uf241'
 else
-  ICON='\uf241'
+  ICON='\uf240'
 fi
 
 if [[ "$STATUS" = "Discharging" ]]; then
   if [[ "$BATTERY" -lt 20 ]]; then
-    ICON='\f071' $ICON
+    ICON='\uf071' $ICON
     COLOR='\x04'
   fi
 elif [[ "$STATUS" = "Charging" ]]; then
-  ICON='\uf1e6' $ICON
+  ICON='\uf1e6 '$ICON
 fi
 
-echo -e  $COLOR$ICON $BATTERY $DISPTIME'\x01'
+echo -e  $COLOR$ICON $BATTERY% $DISPTIME'\x01'
