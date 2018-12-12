@@ -1,14 +1,30 @@
 #!/bin/bash
 
-BATTRY=$(cat /sys/class/power_supply/BAT0/capacity)
 COLOR='\x05'
-#STATUS=$(acpi | grep Charging))
-
-#if [[ "$STATUS" ]]; then
-if [[ "$BATTRY" -lt 20 ]]; then
-  COLOR='\x04'
+ICON='\uf1e6 \uf240'
+BATTERY=$(acpi | awk {'print $4'} | tr -d ',')
+STATUS=$(acpi | awk {'print $3'} | tr -d ',')
+TIME=$(acpi | awk {'print $5'})
+DISPTIME=$(acpi | awk {'split($5,a,":"); print a[1]"h "a[2]"m"'})
+if [[ "$BATTERY" -lt 10 ]]; then
+  ICON='\uf244'
+elif [[ "$BATTERY" -lt 25 ]]; then
+  ICON='\uf243'
+elif [[ "$BATTERY" -lt 50 ]]; then
+  ICON='\uf242'
+elif [[ "$BATTERY" -lt 75 ]]; then
+  ICON='\uf241'
+else
+  ICON='\uf241'
 fi
-#fi
 
-DISP=$(acpi | awk '{ split($5,a,":"); print $3, $4, "["a[1]":"a[2]"]" }' | tr -d ',')
-echo -e $COLOR$DISP'\x01'
+if [[ "$STATUS" = "Discharging" ]]; then
+  if [[ "$BATTERY" -lt 20 ]]; then
+    ICON='\f071' $ICON
+    COLOR='\x04'
+  fi
+elif [[ "$STATUS" = "Charging" ]]; then
+  ICON='\uf1e6' $ICON
+fi
+
+echo -e  $COLOR$ICON $BATTERY $DISPTIME'\x01'
