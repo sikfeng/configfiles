@@ -2,10 +2,11 @@
 
 COLOR='\x05'
 ICON='\uf1e6 \uf240'
-BATTERY=$(acpi | awk {'print $4'} | tr -d ',' | tr -d '%')
-STATUS=$(acpi | awk {'print $3'} | tr -d ',')
-TIME=$(acpi | awk {'print $5'})
-DISPTIME=$(acpi | awk {'split($5,a,":"); print a[1]"h "a[2]"m"'})
+ACPI=$(acpi)
+BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+#TIME=$(echo $ACPI | awk {'print $5'})
+DISPTIME=$(echo $ACPI | awk {'split($5,a,":"); print a[1]"h "a[2]"m"'})
 if [[ "$BATTERY" -lt 10 ]]; then
   ICON='\uf244'
 elif [[ "$BATTERY" -lt 25 ]]; then

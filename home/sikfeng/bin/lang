@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ACTIVE=$(fcitx-remote)
+if [[ "$ACTIVE" = "1" ]]; then
+  KEYBOARDLANG='EN'
+elif [[ "$ACTIVE" = "2" ]]; then
+  KEYBOARDLANG='拼音'
+fi
+
+echo -e '\uf1ab' $KEYBOARDLANG

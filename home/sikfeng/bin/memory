@@ -1,0 +1,7 @@
+#!/bin/bash
+
+INFO=$(free -h | awk '/^Mem:/')
+TOTALMEM=$(echo $INFO | awk '/^Mem/ {print $2}')
+USEDMEM=$(echo $INFO | awk '/^Mem/ {print $3}')
+
+echo -e $USEDMEM/$TOTALMEM
