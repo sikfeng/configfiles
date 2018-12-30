@@ -13,14 +13,28 @@ compinit
 eval "$(dircolors -b)"
 # End of lines added by compinstall
 
-BATTERY='%F{green}%B$(cat /sys/class/power_supply/BAT0/capacity)%%%b%f'
-
-export PS1=''
-PS1+='%B┌ %F{red}%(?..[%?] )%f%F{magenta}%n%f@%F{blue}%m%f %F{yellow}%d%f'
-RPS1+=$BATTERY
-PS1+=$'\n└%b » '
+tput smkx
 
 export LS_OPTS='--color=auto'
 bindkey "^[[3~" delete-char
 
 alias starwars='telnet towel.blinkenlights.nl'
+
+export GPG_TTY=$(tty)
+
+# zsh prompt
+export PS1=''
+function precmd {
+  local TERMWIDTH
+  (( TERMWIDTH = ${COLUMNS} - 1 ))
+  local USERHOSTSIZE=${#${(%):-%n@%m}}
+  local ERRORSIZE=${#${(%):-%(?..[%?] )}}
+  local DIRSIZE=${#${(%):-%d}}
+  DIRLEN=""
+  #if [[ "$USERHOSTSIZE" + "$ERRORSIZE" + "$DIRSIZE" + 3 -gt "$TERMWIDTH" ]]; then
+  #  (( DIRLEN=$TERMWIDTH - ("$USERHOSTSIZE" + "$ERRORSIZE" + "$DIRSIZE" + 3) ))
+  #fi
+}
+PS1+='%B┌ %F{red}%(?..[%?] )%f%F{magenta}%n%f@%F{blue}%m%f %F{yellow}%d%f'
+PS1+=$'\n└%b » '
+
